@@ -1,21 +1,19 @@
 {
     "server":"0.0.0.0",
-    "server_ipv6":"::",
+    "server_ipv6":"[::]",
+    "server_port":80,
     "local_address":"127.0.0.1",
     "local_port":1080,
-    "port_password":{
-        "443":"ilovemusic",
-        "3389":{"protocol":"auth_aes128_md5", "password":"ilovemusic", "obfs":"tls1.2_ticket_auth", "obfs_param":""},
-        "25":{"protocol":"auth_sha1_v4", "password":"ilovemusic", "obfs":"tls1.2_ticket_auth", "obfs_param":""}
-    },
-    "timeout":400,
+    "password":"g06b08120301",
+    "timeout":120,
     "method":"chacha20",
-    "protocol": "origin",
-    "protocol_param": "",
-    "obfs": "plain",
-    "obfs_param": "",
-    "redirect": "",
-    "dns_ipv6": false,
-    "fast_open": true,
-    "workers": 1
+    "protocol":"origin",
+    "protocol_param":"",
+    "obfs":"plain",
+    "obfs_param":"",
+    "redirect":"",
+    "dns_ipv6":false,
+    "fast_open":false,
+    "workers":1,
+    "verbose":-1
 }
