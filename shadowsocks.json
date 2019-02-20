@@ -4,7 +4,7 @@
     "server_port":80,
     "local_address":"127.0.0.1",
     "local_port":1080,
-    "password":"g06b08120301",
+    "password":"passwd",
     "timeout":120,
     "method":"chacha20",
     "protocol":"origin",
