@@ -5,8 +5,10 @@ ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 # 配置生成器
 https://intmainreturn0.com/v2ray-config-gen/#
 
-# 二维码生成函数
+# 二维码生成函数 qr code
 get_v2ray_config_qr_link
+## centos
+yum install -y qrencode git
 
 # op
 ## start
