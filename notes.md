@@ -14,6 +14,12 @@ ssserver -c /etc/shadowsocks.json -d start
 # 已经通过一键脚本自动化安装，再改用官方版本
 修改 /etc/init.d/shadowsocks 脚本中的DEAMON
 
+# bbr
+## check
+sysctl net.ipv4.tcp_available_congestion_control
+### response
+bbr cubic reno
+
 # kcptun 一键安装
 https://ssr.tools/588
 ## 常用命令
