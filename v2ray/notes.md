@@ -4,6 +4,8 @@ ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 # 配置生成器
 https://intmainreturn0.com/v2ray-config-gen/#
+# 客户端配置
+v2ray_client_config="/etc/v2ray/233blog_v2ray_config.json"
 
 # 二维码生成函数 qr code
 get_v2ray_config_qr_link

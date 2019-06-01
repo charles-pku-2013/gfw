@@ -2,14 +2,17 @@
 https://github.com/hq450/fancyss_history_package/tree/master/fancyss_arm
 
 # github安装最新ss版本
-yum install -y python-pip git
+yum install -y python-pip git libsodium
+apt-get install -y python-pip git libsodium3
 pip install git+https://github.com/shadowsocks/shadowsocks.git@master
 ## 前台启动测试
 ssserver -c /etc/shadowsocks.json
 ## 后端启动
 ssserver -c /etc/shadowsocks.json -d start
+ssserver -c /etc/shadowsocks.json -d restart
+ssserver -c /etc/shadowsocks.json -d stop
 ## log
-/var/log/shadowsocks.log
+tail -n 500 -f /var/log/shadowsocks.log
 
 # 已经通过一键脚本自动化安装，再改用官方版本
 修改 /etc/init.d/shadowsocks 脚本中的DEAMON
