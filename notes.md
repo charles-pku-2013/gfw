@@ -3,7 +3,8 @@ https://github.com/hq450/fancyss_history_package/tree/master/fancyss_arm
 
 # github安装最新ss版本
 yum install -y python-pip git libsodium
-apt-get install -y python-pip git libsodium3
+apt-get update -y
+apt-get install -y python-pip git libsodium-dev
 pip install git+https://github.com/shadowsocks/shadowsocks.git@master
 ## 前台启动测试
 ssserver -c /etc/shadowsocks.json
