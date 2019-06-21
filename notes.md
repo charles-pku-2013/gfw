@@ -24,6 +24,29 @@ sysctl net.ipv4.tcp_available_congestion_control
 ### response
 bbr cubic reno
 
+
+# iptables 流量转发
+https://www.debuntu.org/how-to-redirecting-network-traffic-to-a-new-ip-using-iptables/
+## enable forwarding
+echo "1" > /proc/sys/net/ipv4/ip_forward
+or
+sysctl net.ipv4.ip_forward=1
+or
+/etc/sysctl.conf  net.ipv4.ip_forward
+sysctl -p
+## add rules
+iptables -t nat -A PREROUTING -p tcp (-m tcp) -j DNAT --to-destination 2.2.2.2:1111
+iptables -t nat -A PREROUTING -s 192.168.1.0/24 -p tcp -j DNAT --to-destination 2.2.2.2:1111
+iptables -t nat -A PREROUTING  -p tcp -i eth0 -d 1.2.3.5 -j DNAT --to-destination 10.11.1.2
+iptables -t nat -A PREROUTING -i eth0 -p udp --dport 5555 -j DNAT --to-destination 192.168.180.125:5555
+iptables -t nat -A PREROUTING -s [source network / mask] -p tcp --dport 80 -j DNAT --to-destination [your webserver]
+## finally
+iptables -t nat -A POSTROUTING -j MASQUERADE
+service iptables save
+service iptables restart
+## 指定端口号区间 10000:20000
+
+
 # kcptun 一键安装
 https://ssr.tools/588
 ## 常用命令
