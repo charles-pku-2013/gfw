@@ -23,6 +23,10 @@ tail -n 500 -f /var/log/shadowsocks.log
 sysctl net.ipv4.tcp_available_congestion_control
 ### response
 bbr cubic reno
+## enable in debian 9
+echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
+echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
+sysctl -p
 
 
 # iptables 流量转发
