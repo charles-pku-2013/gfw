@@ -22,6 +22,9 @@ systemctl restart v2ray
 ## check
 service v2ray status
 
+# process info / start
+/usr/bin/v2ray/v2ray -config /etc/v2ray/config.json
+
 # uninstall
 停用并卸载服务（systemd）：
 systemctl stop v2ray
