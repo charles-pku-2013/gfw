@@ -18,6 +18,11 @@ tail -n 500 -f /var/log/shadowsocks.log
 # 已经通过一键脚本自动化安装，再改用官方版本
 修改 /etc/init.d/shadowsocks 脚本中的DEAMON
 
+# ss一键安装
+wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ss-go.sh && chmod +x ss-go.sh && bash ss-go.sh
+## 启动命令 new chacha20
+./shadowsocks-go -s :443 -cipher aead_chacha20_poly1305 -password $passwd
+
 # bbr
 ## check
 sysctl net.ipv4.tcp_available_congestion_control
