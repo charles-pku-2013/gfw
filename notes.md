@@ -23,6 +23,13 @@ wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/dou
 ## 启动命令 new chacha20
 ./shadowsocks-go -s :443 -cipher aead_chacha20_poly1305 -password $passwd
 
+# SSR 一键安装 逗比
+## 先安装libsodium
+yum install -y python-pip git libsodium
+wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ssr.sh && chmod +x ssr.sh && bash ssr.sh
+## 配置文件 config
+/etc/shadowsocksr/user-config.json
+
 # bbr
 ## check
 sysctl net.ipv4.tcp_available_congestion_control
@@ -93,3 +100,8 @@ supervisorctl status kcptun
   "nocomp": true,
   "quiet": false
 }
+
+# domain 腾讯云域名
+www.charlesio.xyz
+
+
