@@ -104,4 +104,7 @@ supervisorctl status kcptun
 # domain 腾讯云域名
 www.charlesio.xyz
 
+# for router
+https://github.com/hq450/fancyss
+
 
