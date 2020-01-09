@@ -106,5 +106,8 @@ www.charlesio.xyz
 
 # for router
 https://github.com/hq450/fancyss
+## koolshare
+email: qmail
+pass: G06
 
 
