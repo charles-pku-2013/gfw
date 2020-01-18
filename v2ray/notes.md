@@ -1,8 +1,14 @@
 # 一键安装
 https://github.com/233boy/v2ray/wiki/V2Ray%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC
-bash <(curl -s -L https://git.io/v2ray.sh)
-## 协议
-mKCP_wechat-video_dynamicPort
+<!-- bash <(curl -s -L https://git.io/v2ray.sh) -->
+## ws + tls
+### namesilo bfyviolin g06
+### cloudflare gmail C01PKU
+### v2-ui
+https://blog.sprov.xyz/2019/08/03/v2-ui/
+### nginx 网站伪装
+https://www.v2rayssr.com/easyv2ray.html
+<!-- bash <(curl -L -s https://raw.githubusercontent.com/wulabing/V2Ray_ws-tls_bash_onekey/master/install.sh) | tee v2ray_ins.log -->
 
 # adjust time & timezone
 date -R
