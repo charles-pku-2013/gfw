@@ -6,9 +6,24 @@ https://github.com/233boy/v2ray/wiki/V2Ray%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E
 ### cloudflare gmail C01PKU
 ### v2-ui
 https://blog.sprov.xyz/2019/08/03/v2-ui/
-### nginx 网站伪装
+### nginx 网站伪装 一键安装
 https://www.v2rayssr.com/easyv2ray.html
 <!-- bash <(curl -L -s https://raw.githubusercontent.com/wulabing/V2Ray_ws-tls_bash_onekey/master/install.sh) | tee v2ray_ins.log -->
+### 宝塔 + nginx + v2ray
+https://www.v2rayssr.com/v2raybaota.html
+https://www.youtube.com/watch?v=StfMfa1uk7U&list=PLizxI6bXDPzMllC4U17KFq5kejc4Z9iJY&index=3&t=1473s
+1. 安装之前的一键脚本
+2. systemctl disable nginx  禁用之前安装的nginx
+3. 宝塔开启nginx，创建站点（站点路径可服用之前的），并开启SSL
+4. 添加站点转发配置
+location /7be84b44 {
+    proxy_redirect off;
+    proxy_pass http://127.0.0.1:35122;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+    proxy_set_header Host $http_host;
+}
 
 # adjust time & timezone
 date -R
