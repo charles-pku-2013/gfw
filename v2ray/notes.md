@@ -15,7 +15,7 @@ https://www.youtube.com/watch?v=StfMfa1uk7U&list=PLizxI6bXDPzMllC4U17KFq5kejc4Z9
 1. 安装之前的一键脚本
 2. systemctl disable nginx  禁用之前安装的nginx
 3. 宝塔开启nginx，创建站点（站点路径可服用之前的），并开启SSL
-4. 添加站点转发配置
+4. 添加站点转发配置(注意！配置实在网站配置里，不是nginx配置)
 location /7be84b44 {
     proxy_redirect off;
     proxy_pass http://127.0.0.1:35122;

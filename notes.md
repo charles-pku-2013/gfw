@@ -44,7 +44,7 @@ sysctl -p
 
 # iptables 流量转发
 https://www.debuntu.org/how-to-redirecting-network-traffic-to-a-new-ip-using-iptables/
-## 一键安装
+## 一键安装 改用natconfig.sh
 wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubiBackup/doubi/master/iptables-pf.sh && chmod +x iptables-pf.sh && bash iptables-pf.sh
 ## enable forwarding
 echo "1" > /proc/sys/net/ipv4/ip_forward
