@@ -111,4 +111,13 @@ https://github.com/hq450/fancyss
 email: qmail
 pass: G06
 
+# 付费 buy paid
+## stc
+https://stc-beta4.com
+qmail
+g06
+## 次元链接
+https://portal.cylink0122.icu/
+
+
 
