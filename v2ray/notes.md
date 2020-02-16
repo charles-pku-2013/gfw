@@ -1,6 +1,10 @@
 # 一键安装
 https://github.com/233boy/v2ray/wiki/V2Ray%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC
 <!-- bash <(curl -s -L https://git.io/v2ray.sh) -->
+## 官方脚本
+https://v2raycn.com/46.html
+<!-- bash <(curl -L -s https://install.direct/go.sh) -->
+
 ## ws + tls
 ### namesilo bfyviolin g06
 ### cloudflare gmail C01PKU
@@ -63,4 +67,17 @@ update-rc.d -f v2ray remove
 /var/log/v2ray/* (日志)
 /lib/systemd/system/v2ray.service (systemd 启动项)
 /etc/init.d/v2ray (sysv 启动项)
+
+
+# docker
+https://github.com/v2fly/docker
+docker build -t v2ray:latest .
+## tutorial
+https://toutyrater.github.io/app/docker-deploy-v2ray.html
+
+# docker with systemd service
+docker pull centos/systemd
+docker run -d -v `pwd`:/share -p 443j:443 --name v2ray --privileged  centos/systemd:latest /usr/sbin/init
+yum update -y
+yum install -y wget curl net-tools openssl
 

@@ -34,7 +34,7 @@ wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/dou
 wget -N --no-check-certificate "https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh" && chmod +x tcp.sh && ./tcp.sh
 ## check
 sysctl net.ipv4.tcp_available_congestion_control
-### response
+response
 bbr cubic reno
 ## enable in debian 9
 echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf

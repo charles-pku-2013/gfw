@@ -1,0 +1,166 @@
+{
+    "log": {
+        "loglevel": "warning"
+    },
+    "inbounds": [
+        {
+            "port": 8500,
+            "protocol": "vmess",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "uuid",
+                        "level": 1,
+                        "alterId": 16
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "tcpSettings": {
+                    "header": {
+                        "type": "http",
+                        "response": {
+                            "version": "1.1",
+                            "status": "200",
+                            "reason": "OK",
+                            "headers": {
+                                "Content-encoding": [
+                                    "gzip"
+                                ],
+                                "Content-Type": [
+                                    "text/html; charset=utf-8"
+                                ],
+                                "Cache-Control": [
+                                    "no-cache"
+                                ],
+                                "Vary": [
+                                    "Accept-Encoding"
+                                ],
+                                "X-Frame-Options": [
+                                    "deny"
+                                ],
+                                "X-XSS-Protection": [
+                                    "1; mode=block"
+                                ],
+                                "X-content-type-options": [
+                                    "nosniff"
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls"
+                ]
+            }
+        }
+        //include_ss
+        //include_socks
+        //include_mtproto
+        //include_in_config
+        //
+    ],
+  "outbounds": [
+    {
+      "mux": {
+        "enabled": false
+      },
+      "protocol": "vmess",
+      "settings": {
+        "vnext": [
+          {
+            "address": "server-url",
+            "port": 443,
+            "users": [
+              {
+                "alterId": 16,
+                "id": "server-uuid",
+                "level": 8,
+                "security": "auto"
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "tlssettings": {
+          "allowInsecure": true,
+          "serverName": "www.charlespku.xyz"
+        },
+        "wssettings": {
+          "connectionReuse": true,
+          "headers": {
+            "Host": "www.charlespku.xyz"
+          },
+          "path": "/d49492a0/"
+        }
+      },
+      "tag": "proxy"
+    },
+    {
+      "protocol": "freedom",
+      "settings": {},
+      "tag": "direct"
+    },
+    {
+      "protocol": "blackhole",
+      "settings": {
+        "response": {
+          "type": "http"
+        }
+      },
+      "tag": "block"
+    }
+  ],
+    "dns": {
+        "servers": [
+            "192.168.50.1",
+            "1.1.1.1",
+            "1.0.0.1",
+            "8.8.8.8",
+            "8.8.4.4",
+            "localhost"
+        ]
+    },
+  "routing": {
+    "domainStrategy": "IPIfNonMatch",
+    "rules": [
+      {
+        "domain": [
+          "domain:googleapis.cn"
+        ],
+        "outboundTag": "proxy",
+        "type": "field"
+      },
+      {
+        "ip": [
+          "geoip:private"
+        ],
+        "outboundTag": "direct",
+        "type": "field"
+      },
+      {
+        "ip": [
+          "geoip:cn"
+        ],
+        "outboundTag": "direct",
+        "type": "field"
+      },
+      {
+        "domain": [
+          "geosite:cn"
+        ],
+        "outboundTag": "direct",
+        "type": "field"
+      }
+    ]
+  },
+  "stats": {}
+}
