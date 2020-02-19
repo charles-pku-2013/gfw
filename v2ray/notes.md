@@ -77,7 +77,8 @@ https://toutyrater.github.io/app/docker-deploy-v2ray.html
 
 # docker with systemd service
 docker pull centos/systemd
-docker run -d -v `pwd`:/share -p 443j:443 --name v2ray --privileged  centos/systemd:latest /usr/sbin/init
+docker run -d --restart always -v `pwd`:/share -p 8500:8500 --name v2ray --privileged  centos/systemd:latest /usr/sbin/init
+docker run -d --restart always -v `pwd`:/share -p 8500:8500 --name v2ray --privileged  centos:v2ray /usr/sbin/init
 yum update -y
-yum install -y wget curl net-tools openssl
+yum install -y wget curl net-tools openssl initscripts which vim
 
