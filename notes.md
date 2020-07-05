@@ -70,6 +70,28 @@ service iptables restart
 ## list rules
 iptables -S (TCP)
 
+# iptables for v2ray openwrt
+https://github.com/felix-fly/v2ray-openwrt
+## Only TCP
+iptables -t nat -N V2RAY
+iptables -t nat -A V2RAY -d 0.0.0.0 -j RETURN
+iptables -t nat -A V2RAY -d 127.0.0.0 -j RETURN
+iptables -t nat -A V2RAY -d 192.168.1.0/24 -j RETURN
+### From lans redirect to Dokodemo-door's local port
+iptables -t nat -A V2RAY -s 192.168.1.0/24 -p tcp -j REDIRECT --to-ports 12345
+iptables -t nat -A PREROUTING -p tcp -j V2RAY
+## With UDP support
+ip rule add fwmark 1 table 100
+ip route add local 0.0.0.0/0 dev lo table 100
+iptables -t mangle -N V2RAY
+iptables -t mangle -A V2RAY -d 0.0.0.0 -j RETURN
+iptables -t mangle -A V2RAY -d 127.0.0.0 -j RETURN
+iptables -t mangle -A V2RAY -d 192.168.1.0/24 -j RETURN
+### From lans redirect to Dokodemo-door's local port
+iptables -t mangle -A V2RAY -p tcp -s 192.168.1.0/24 -j TPROXY --on-port 12345 --tproxy-mark 1
+iptables -t mangle -A V2RAY -p udp -s 192.168.1.0/24 -j TPROXY --on-port 12345 --tproxy-mark 1
+iptables -t mangle -A PREROUTING -j V2RAY
+
 
 # kcptun 一键安装
 https://ssr.tools/588
@@ -110,6 +132,23 @@ https://github.com/hq450/fancyss
 ## koolshare
 email: qmail
 pass: G06
+
+# update v2ray for router v2ray-arm
+https://github.com/v2ray/v2ray-core/releases
+## download v2ray-linux-arm.zip
+## replace v2ray v2ctl
+
+# 路由器工具安装 opkg
+https://www.chiphell.com/thread-1347856-1-1.html
+mkdir -p /jffs/opt
+ln -nsf /jffs/opt /tmp/opt
+wget http://qnapware.zyxmon.org/binaries-armv7/installer/entware_install_arm.sh
+sh ./entware_install_arm.sh
+vi /jffs/scripts/post-mount Add
+ln -nsf /jffs/opt /tmp/opt
+## check cpu model armv7l 32bit
+uname -m
+
 
 # 付费 buy paid
 ## stc
