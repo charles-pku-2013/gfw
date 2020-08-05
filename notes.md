@@ -1,5 +1,5 @@
 # 路由器ss离线安装包
-https://github.com/hq450/fancyss_history_package/tree/master/fancyss_arm
+https://github.com/hq450/fancyss_history_package/tree/master/fancyss_arm384
 
 # github安装最新ss版本
 yum install -y python-pip git libsodium
