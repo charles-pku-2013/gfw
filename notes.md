@@ -41,7 +41,6 @@ echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
 echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
 sysctl -p
 
-
 # iptables 流量转发
 https://www.debuntu.org/how-to-redirecting-network-traffic-to-a-new-ip-using-iptables/
 ## 一键安装 改用natconfig.sh
@@ -92,7 +91,6 @@ iptables -t mangle -A V2RAY -p tcp -s 192.168.1.0/24 -j TPROXY --on-port 12345 -
 iptables -t mangle -A V2RAY -p udp -s 192.168.1.0/24 -j TPROXY --on-port 12345 --tproxy-mark 1
 iptables -t mangle -A PREROUTING -j V2RAY
 
-
 # kcptun 一键安装
 https://ssr.tools/588
 ## 常用命令
@@ -135,8 +133,8 @@ pass: G06
 
 # update v2ray for router v2ray-arm
 https://github.com/v2ray/v2ray-core/releases
-## download v2ray-linux-arm.zip
-## replace v2ray v2ctl
+download v2ray-linux-arm32-v5.zip
+replace v2ray v2ctl
 
 # 路由器工具安装 opkg
 https://www.chiphell.com/thread-1347856-1-1.html
