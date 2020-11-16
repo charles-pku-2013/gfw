@@ -5,9 +5,16 @@ https://github.com/233boy/v2ray/wiki/V2Ray%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E
 https://v2raycn.com/46.html
 <!-- bash <(curl -L -s https://install.direct/go.sh) -->
 
+# 搬瓦工
+charlespku.xyz
+gmail
+g0
+port: 27315
+X6qYbJNDcaWa
+Your backup key: LLZWCQRX2N2YZE7N
 ## ws + tls
 ### namesilo bfyviolin g06
-### cloudflare gmail C01PKU
+### cloudflare https://www.cloudflare.com gmail C01PKU
 ### v2-ui
 https://blog.sprov.xyz/2019/08/03/v2-ui/
 ### nginx 网站伪装 一键安装
@@ -28,6 +35,18 @@ location /7be84b44 {
     proxy_set_header Connection "upgrade";
     proxy_set_header Host $http_host;
 }
+
+# Get linux distribution debian centos
+lsb_release -a
+
+# AWS amazon cloud
+18.183.87.78
+www.sunchao.monster
+s15600687960@163.com
+G06
+user: charlespku2013
+ssh -i aws.pem admin@sunchao.monster
+EC2
 
 # adjust time & timezone
 date -R
