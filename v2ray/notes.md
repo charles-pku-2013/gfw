@@ -1,6 +1,6 @@
 # 一键安装
 https://github.com/233boy/v2ray/wiki/V2Ray%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC
-<!-- bash <(curl -s -L https://git.io/v2ray.sh) -->
+bash <(curl -s -L https://git.io/v2ray.sh)
 ## 官方脚本
 https://v2raycn.com/46.html
 <!-- bash <(curl -L -s https://install.direct/go.sh) -->
@@ -100,4 +100,22 @@ docker run -d --restart always -v `pwd`:/share -p 8500:8500 --name v2ray --privi
 docker run -d --restart always -v `pwd`:/share -p 8500:8500 --name v2ray --privileged  centos:v2ray /usr/sbin/init
 yum update -y
 yum install -y wget curl net-tools openssl initscripts which vim
+
+
+# service v2ray /etc/systemd/system/v2ray.service
+[Unit]
+Description=V2Ray Service
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+PIDFile=/run/v2ray.pid
+ExecStart=/usr/bin/v2ray/v2ray -config /etc/v2ray/config.json
+Restart=always
+RestartPreventExitStatus=23
+
+[Install]
+WantedBy=multi-user.target
+
 

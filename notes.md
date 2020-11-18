@@ -157,4 +157,8 @@ g06
 https://portal.cylink0122.icu/
 
 
+# openvpn
+## howto
+https://www.cyberciti.biz/faq/debian-10-set-up-openvpn-server-in-5-minutes/
+wget https://raw.githubusercontent.com/Angristan/openvpn-install/master/openvpn-install.sh
 
