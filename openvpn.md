@@ -45,6 +45,69 @@ RestartPreventExitStatus=23
 WantedBy=multi-user.target
 
 
+# Debian client openvpn3
+https://openvpn.net/vpn-server-resources/connecting-to-access-server-with-linux/
+apt-get install -y gnupg2 apt-transport-https
+wget https://swupdate.openvpn.net/repos/openvpn-repo-pkg-key.pub
+apt-key add openvpn-repo-pkg-key.pub
+wget -O /etc/apt/sources.list.d/openvpn3.list https://swupdate.openvpn.net/community/openvpn3/repos/openvpn3-buster.list
+apt-get update
+apt-get install -y openvpn3
+
+apt-get install -y openvpn
+openvpn --config xx.ovpn
+## run in docker
+docker run --cap-add=NET_ADMIN --cap-add=NET_RAW --cap-add=SYS_ADMIN --device=/dev/net/tun -d -p 8880:80 -p 1935:1935 -p 8500:8500 -p 10022:22 -v `pwd`:/share --name "proxy" proxy:latest /usr/bin/supervisord
+--privileged
+--cap-add=NET_RAW
+## add to .ovpn
+script-security 2
+up /etc/openvpn/update-resolv-conf
+down /etc/openvpn/update-resolv-conf
+
+iptables -t nat -I POSTROUTING 1 -s 10.8.0.0/24 -o eth0 -j MASQUERADE
+iptables -I INPUT 1 -i tun0 -j ACCEPT
+iptables -I FORWARD 1 -i eth0 -o tun0 -j ACCEPT
+iptables -I FORWARD 1 -i tun0 -o eth0 -j ACCEPT
+iptables -I INPUT 1 -i eth0 -p tcp --dport 21194 -j ACCEPT
+
+# install shadowsocks
+wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh
+chmod +x shadowsocks-all.sh
+./shadowsocks-all.sh 2>&1 | tee shadowsocks-all.log
+
+# server.conf
+port 11194
+proto udp
+dev tun
+user nobody
+group nobody
+persist-key
+persist-tun
+keepalive 10 120
+topology subnet
+server 10.8.0.0 255.255.255.0
+ifconfig-pool-persist ipp.txt
+push "dhcp-option DNS 176.103.130.130"
+push "dhcp-option DNS 176.103.130.131"
+push "redirect-gateway def1 bypass-dhcp"
+dh none
+ecdh-curve prime256v1
+tls-crypt tls-crypt.key
+crl-verify crl.pem
+ca ca.crt
+cert server_1JnU1kNRHl255oeU.crt
+key server_1JnU1kNRHl255oeU.key
+auth SHA256
+cipher AES-128-GCM
+ncp-ciphers AES-128-GCM
+tls-server
+tls-version-min 1.2
+tls-cipher TLS-ECDHE-ECDSA-WITH-AES-128-GCM-SHA256
+client-config-dir /etc/openvpn/ccd
+status /var/log/openvpn/status.log
+verb 3
+
 
 # help
 General Options:

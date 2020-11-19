@@ -37,6 +37,7 @@ location /7be84b44 {
 }
 
 # Get linux distribution debian centos
+apt-get install -y lsb-release
 lsb_release -a
 
 # AWS amazon cloud
