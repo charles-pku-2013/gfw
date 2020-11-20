@@ -17,6 +17,7 @@ status  // 保证唯一
 ## run background
 /usr/sbin/openvpn2 --daemon --cd /etc/openvpn --config /etc/openvpn/server2.conf
 ## create iptables rules 设置转发规则
+apt-get install -y iptables dnsutils
 iptables -t nat -I POSTROUTING 1 -s 10.9.0.0/24 -o eth0 -j MASQUERADE
 iptables -I INPUT 1 -i tun1 -j ACCEPT
 iptables -I FORWARD 1 -i eth0 -o tun1 -j ACCEPT
@@ -57,7 +58,7 @@ apt-get install -y openvpn3
 apt-get install -y openvpn
 openvpn --config xx.ovpn
 ## run in docker
-docker run --cap-add=NET_ADMIN --cap-add=NET_RAW --cap-add=SYS_ADMIN --device=/dev/net/tun -d -p 8880:80 -p 1935:1935 -p 8500:8500 -p 10022:22 -v `pwd`:/share --name "proxy" proxy:latest /usr/bin/supervisord
+docker run --cap-add=NET_ADMIN --device=/dev/net/tun -d -v `pwd`:/share --name "test" rtmp:20201115 /usr/bin/supervisord
 --privileged
 --cap-add=NET_RAW
 ## add to .ovpn
@@ -619,4 +620,20 @@ PKCS#11 standalone options:
 
 General Standalone Options:
 --show-gateway : Show info about default gateway.
+
+
+iptables -t nat -I POSTROUTING 1 -s 10.9.0.0/24 -o eth0 -j MASQUERADE
+iptables -I INPUT 1 -i tun0 -j ACCEPT
+iptables -I FORWARD 1 -i eth0 -o tun0 -j ACCEPT
+iptables -I FORWARD 1 -i tun0 -o eth0 -j ACCEPT
+iptables -I INPUT 1 -i eth0 -p tcp --dport 21194 -j ACCEPT
+
+
+
+
+
+
+
+
+
 
