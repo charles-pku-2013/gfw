@@ -622,18 +622,26 @@ General Standalone Options:
 --show-gateway : Show info about default gateway.
 
 
-iptables -t nat -I POSTROUTING 1 -s 10.9.0.0/24 -o eth0 -j MASQUERADE
-iptables -I INPUT 1 -i tun0 -j ACCEPT
-iptables -I FORWARD 1 -i eth0 -o tun0 -j ACCEPT
-iptables -I FORWARD 1 -i tun0 -o eth0 -j ACCEPT
-iptables -I INPUT 1 -i eth0 -p tcp --dport 21194 -j ACCEPT
+
+# route before
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+0.0.0.0         192.168.50.1    0.0.0.0         UG    0      0        0 eth0
+192.168.50.0    0.0.0.0         255.255.255.0   U     0      0        0 eth0
+# route after
+0.0.0.0         192.168.50.1    0.0.0.0         UG    0      0        0 eth0
+192.168.50.0    0.0.0.0         255.255.255.0   U     0      0        0 eth0
+0.0.0.0         10.8.0.1        128.0.0.0       UG    0      0        0 tun0
+10.8.0.0        0.0.0.0         255.255.255.0   U     0      0        0 tun0
+128.0.0.0       10.8.0.1        128.0.0.0       UG    0      0        0 tun0
+97.64.22.60     192.168.50.1    255.255.255.255 UGH   0      0        0 eth0
+# route cmd
+/sbin/ip route add 97.64.22.60/32 via 192.168.50.1
+/sbin/ip route add 0.0.0.0/1 via 10.8.0.1
+/sbin/ip route add 128.0.0.0/1 via 10.8.0.1
 
 
-
-
-
-
-
-
-
-
+iptables -t nat -A POSTROUTING -o tun0 -j MASQUERADE
+iptables -A FORWARD -i eth0 -o tun0 -j ACCEPT
+iptables -A FORWARD -o tun0 -j ACCEPT
+iptables -A FORWARD -i tun0 -m conntrack --ctstate ESTABLISHED,RELATED   -j ACCEPT
+iptables -A INPUT -i tun0 -j ACCEPT
