@@ -1,5 +1,6 @@
 # openvpn
 ## howto 一键安装
+https://github.com/angristan/openvpn-install
 https://www.cyberciti.biz/faq/debian-10-set-up-openvpn-server-in-5-minutes/
 wget https://raw.githubusercontent.com/Angristan/openvpn-install/master/openvpn-install.sh
 
@@ -18,11 +19,13 @@ status  // 保证唯一
 /usr/sbin/openvpn2 --daemon --cd /etc/openvpn --config /etc/openvpn/server2.conf
 ## create iptables rules 设置转发规则
 apt-get install -y iptables dnsutils
+### iptables设置加入 /etc/iptables/add-openvpn-rules.sh 和 /etc/iptables/rm-openvpn-rules.sh
 iptables -t nat -I POSTROUTING 1 -s 10.9.0.0/24 -o eth0 -j MASQUERADE
 iptables -I INPUT 1 -i tun1 -j ACCEPT
 iptables -I FORWARD 1 -i eth0 -o tun1 -j ACCEPT
 iptables -I FORWARD 1 -i tun1 -o eth0 -j ACCEPT
-iptables -I INPUT 1 -i eth0 -p tcp --dport 21194 -j ACCEPT
+iptables -I INPUT 1 -i eth0 -p tcp --dport 52619 -j ACCEPT
+删除规则 -I 改成 -D 去掉1
 ## 查看 check iptable
 iptables -S
 iptables -L -v -n
@@ -30,6 +33,7 @@ iptables -L -v -n
 cd /lib/systemd/system/
 vim openvpn2.service
 systemctl daemon-reload
+systemctl enable openvpn2
 service openvpn2 start
 
 [Unit]
@@ -44,6 +48,17 @@ RestartPreventExitStatus=23
 
 [Install]
 WantedBy=multi-user.target
+
+
+# 修改端口 change port
+systemctl list-unit-files --state=enabled | grep openvpn
+iptables-openvpn.service                    enabled
+openvpn-server@.service                     enabled
+service iptables-openvpn.service status
+cat /etc/systemd/system/iptables-openvpn.service
+## 除了更改 /etc/openvpn/server.conf 还要更改这两个脚本
+/etc/iptables/add-openvpn-rules.sh
+/etc/iptables/rm-openvpn-rules.sh
 
 
 # Debian client openvpn3
@@ -65,12 +80,6 @@ docker run --cap-add=NET_ADMIN --device=/dev/net/tun -d -v `pwd`:/share --name "
 script-security 2
 up /etc/openvpn/update-resolv-conf
 down /etc/openvpn/update-resolv-conf
-
-iptables -t nat -I POSTROUTING 1 -s 10.8.0.0/24 -o eth0 -j MASQUERADE
-iptables -I INPUT 1 -i tun0 -j ACCEPT
-iptables -I FORWARD 1 -i eth0 -o tun0 -j ACCEPT
-iptables -I FORWARD 1 -i tun0 -o eth0 -j ACCEPT
-iptables -I INPUT 1 -i eth0 -p tcp --dport 21194 -j ACCEPT
 
 # install shadowsocks
 wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh
