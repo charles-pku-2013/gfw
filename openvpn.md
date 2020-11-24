@@ -136,10 +136,13 @@ Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
 
 # 启动openvpn client后server(ssh ss)不能用问题
 https://serverfault.com/questions/659955/allowing-ssh-on-a-server-with-an-active-openvpn-client
-## solution 1
-ip rule add from $(ip route get 1 | grep -Po '(?<=src )(\S+)') table 128
-ip route add table 128 to $(ip route get 1 | grep -Po '(?<=src )(\S+)')/32 dev $(ip -4 route ls | grep default | grep -Po '(?<=dev )(\S+)')
-ip route add table 128 default via $(ip -4 route ls | grep default | grep -Po '(?<=via )(\S+)')
+## solution 1 OK 先执行，再启动vpn
+ip rule add from 192.168.50.252 table 128
+ip route add table 128 to 192.168.50.0/24 dev eth0
+ip route add table 128 default via 192.168.50.1
+// ip rule add from $(ip route get 1 | grep -Po '(?<=src )(\S+)') table 128
+// ip route add table 128 to $(ip route get 1 | grep -Po '(?<=src )(\S+)')/32 dev $(ip -4 route ls | grep default | grep -Po '(?<=dev )(\S+)')
+// ip route add table 128 default via $(ip -4 route ls | grep default | grep -Po '(?<=via )(\S+)')  // gateway
 ## solution 2
 // set "connection" mark of connection from eth0 when first packet of connection arrives
 iptables -t mangle -A PREROUTING -i eth0 -m conntrack --ctstate NEW -j CONNMARK --set-mark 1234
