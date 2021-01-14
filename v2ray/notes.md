@@ -5,7 +5,7 @@ bash <(curl -s -L https://git.io/v2ray.sh)
 https://v2raycn.com/46.html
 <!-- bash <(curl -L -s https://install.direct/go.sh) -->
 
-# 搬瓦工
+# 搬瓦工 bandwagon
 charlespku.xyz
 gmail
 g0
