@@ -127,4 +127,11 @@ RestartPreventExitStatus=23
 [Install]
 WantedBy=multi-user.target
 
+# geoip geosite
+wget -q https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/geoip.dat -O /usr/bin/geoip.dat >/dev/null >/dev/null
+wget -q https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/geosite.dat -O /usr/bin/geosite.dat >/dev/null >/dev/null
+
+
+
+
 

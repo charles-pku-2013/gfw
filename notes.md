@@ -130,6 +130,10 @@ https://github.com/hq450/fancyss
 ## koolshare
 email: qmail
 pass: G06
+## 固件下载
+https://firmware.koolshare.cn/
+## 新版软件中心关键词屏蔽解决
+sed -i 's/\tdetect_package/\t# detect_package/g' /koolshare/scripts/ks_tar_install.sh
 
 # update v2ray for router v2ray-arm
 https://github.com/v2ray/v2ray-core/releases
