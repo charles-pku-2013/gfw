@@ -26,3 +26,11 @@ ln -nsf /jffs/opt /tmp/opt
 ## check cpu model armv7l 32bit
 uname -m
 
+# opkg manager
+https://openwrt.org/packages/start
+opkg update
+opkg list_installed
+opkg install vim-full
+opkg install $pkg_or_ipkfile
+opkg remove $pkg
+

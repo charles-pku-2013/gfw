@@ -163,3 +163,7 @@ linux 系统中，可以自定义从 1－252个路由表，其中，linux系统�
 255#表： locale table 保存本地接口地址，广播地址、NAT地址 由系统维护，用户不得更改
 路由表序号和表名的对应关系在 /etc/iproute2/rt_tables 文件中，可手动编辑。路由表添加完毕即时生效
 
+
+# Set gateway, not using the default
+push "route 10.10.10.0 255.255.255.0 10.0.0.2 1"
+

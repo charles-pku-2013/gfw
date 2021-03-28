@@ -16,8 +16,8 @@ Your backup key: LLZWCQRX2N2YZE7N
 ### namesilo bfyviolin g06
 My Account -> Domain Manager -> Manage DNS for this domain (蓝色圆形)
 添加两条A记录，第一条填空，第二条www，删除其他的
-	A	45.62.121.78	NA	7207*	3rd-party
-www	A	45.62.121.78	NA	7207*	3rd-party
+    A   45.62.121.78    NA  7207*   3rd-party
+www A   45.62.121.78    NA  7207*   3rd-party
 设置DNS服务器(最后一个图标,3个圆饼) jim.ns.cloudflare.com, princess.ns.cloudflare.com
 ### cloudflare https://www.cloudflare.com gmail C01PKU
 #### remove domian site
