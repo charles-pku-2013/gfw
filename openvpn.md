@@ -58,7 +58,6 @@ service iptables-openvpn.service status
 cat /etc/systemd/system/iptables-openvpn.service
 ## 除了更改 /etc/openvpn/server.conf 还要更改这两个脚本
 /etc/iptables/add-openvpn-rules.sh
-### 这个要重启之后修改
 /etc/iptables/rm-openvpn-rules.sh
 
 
