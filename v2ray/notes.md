@@ -6,7 +6,7 @@ https://v2raycn.com/46.html
 <!-- bash <(curl -L -s https://install.direct/go.sh) -->
 
 # 搬瓦工 bandwagon
-charlespku.xyz
+sspku.xyz
 gmail
 g0
 port: 27315
